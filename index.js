@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const {databaseConnection} = require('./Database/dbConnection');
+const adminRoutes = require('./Routes/AdminAuthRoutes');
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,9 @@ const startServer = () => {
     app.get("/", (req, res) => {
         res.json(200).send("E-Commerce API's");
     });
+
+    // Routes
+    app.use("/admin", adminRoutes);
 
     app.listen(process.env.PORT, () => console.log(`Server Listening @ ${process.env.PORT}`));
 }
